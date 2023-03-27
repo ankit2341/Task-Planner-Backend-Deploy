@@ -33,6 +33,16 @@ tasksRouter.patch("/:id", async (req, res) => {
   }
 });
 
+tasksRouter.delete("/:id", async (req, res) => {
+  const body = req.params.id;
+  try {
+    await SprintModel.findByIdAndDelete({ _id: body });
+    res.status(200).send({ msg: "Task deleted" });
+  } catch (err) {
+    res.status(404).send({ msg: "404 error" });
+  }
+});
+
 module.exports = {
   tasksRouter,
 };
